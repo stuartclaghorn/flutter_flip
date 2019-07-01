@@ -69,12 +69,13 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               // Text('Front', style: Theme.of(context).textTheme.headline),
               Image.asset('images/WCUGoldenRams.png'),
-              Text('Click here to flip back',
-                  style: Theme.of(context).textTheme.body1),
+              // Text('Click here to flip back',
+              //style: Theme.of(context).textTheme.body1),
             ],
           ),
         ),
         back: Container(
+          padding: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
             color: Colors.purple, // Color(0xFF006666),
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -83,17 +84,19 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // Text('Back', style: Theme.of(context).textTheme.headline),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/Philips_Hall.jpg'),
-                    // ...
-                  ),
-                  // ...
+              Expanded(
+                child: Image.asset('images/Philips_Hall.jpg'),
+              ),
+              // ...
+              Text(
+                'Philips Hall',
+                style: TextStyle(
+                  color: Colors.amberAccent,
+                  fontSize: 24.0,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Text('Click here to flip front',
-                  style: Theme.of(context).textTheme.body1),
             ],
           ),
         ),
