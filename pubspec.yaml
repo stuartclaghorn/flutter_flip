@@ -44,6 +44,7 @@ flutter:
   assets:
     - images/WCUGoldenRams.png
     - images/Philips_Hall.jpg
+    - images/old_library.jpg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
