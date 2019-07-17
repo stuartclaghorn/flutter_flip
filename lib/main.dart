@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flip/components/card_row.dart';
+import 'package:flutter_flip/constants.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'FlipCard',
       theme: ThemeData.dark(),
       home: MyHomePage(title: 'Flip Card'),
@@ -25,6 +27,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<CardTypes> arr;
+  String _timeString;
+
+  @override
+  void initState() {}
+
   _renderBg() {
     return Container(
       decoration: BoxDecoration(
@@ -55,15 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CardRow(start: 0),
-        CardRow(start: 0),
-        CardRow(start: 0),
+        CardRow(start: 0, arr: arr),
+        CardRow(start: 1, arr: arr),
+        CardRow(start: 2, arr: arr),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    arr = CardTypes.values.expand((i) => [i, i]).toList();
+    arr.shuffle();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

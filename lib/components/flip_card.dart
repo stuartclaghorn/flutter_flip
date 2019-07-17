@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_flip/globals.dart';
+import 'package:flutter_flip/constants.dart';
 
 enum FlipDirection {
   VERTICAL,
@@ -39,6 +41,7 @@ class AnimationCard extends StatelessWidget {
 class FlipCard extends StatefulWidget {
   final Widget front;
   final Widget back;
+  final CardTypes cardType;
 
   /// The amount of milliseconds a turn animation will take.
   final int speed;
@@ -74,6 +77,7 @@ class FlipCard extends StatefulWidget {
       {Key key,
       @required this.front,
       @required this.back,
+      @required this.cardType,
       this.speed = 500,
       this.onFlip,
       this.direction = FlipDirection.HORIZONTAL,
@@ -125,21 +129,49 @@ class FlipCardState extends State<FlipCard>
         ),
       ],
     ).animate(controller);
+    flippedCards = 0;
   }
 
   void toggleCard() {
-    if (widget.onFlip != null) {
-      widget.onFlip();
-    }
-    if (isFront) {
-      controller.forward();
-    } else {
-      controller.reverse();
-    }
+    if (flippedCards < 2) {
+      if (widget.onFlip != null) {
+        widget.onFlip();
+      }
+      if (isFront) {
+        controller.forward();
+        flippedCards++;
+        print(widget.cardType);
+      } else {
+        controller.reverse();
+        flippedCards--;
+        if (flipped != null) {
+          flipped = null;
+        }
+      }
 
-    setState(() {
-      isFront = !isFront;
-    });
+      setState(() {
+        isFront = !isFront;
+      });
+
+      // print(flipped);
+      if (flipped == null && flippedCards == 1) {
+        flipped = this.widget;
+        print('${flipped.cardType}');
+      } else if (flippedCards == 2) {
+        print(flipped.cardType);
+        print(this.widget.cardType);
+        if (flipped.cardType == this.widget.cardType) {
+          print("Match!");
+        } else {
+          print("Not Match!");
+        }
+      }
+      // print("widgets: ${flipped.length}");
+      print("widget cardType: ${this.widget.cardType}");
+      // if (flipped.length >= 1) {
+      // print("flipped : ${flipped[0].cardType}");
+      // }
+    }
   }
 
   @override
